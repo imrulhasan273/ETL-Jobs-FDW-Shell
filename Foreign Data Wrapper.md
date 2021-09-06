@@ -3,8 +3,8 @@
 ---
 
 
-- Source 		: source is the remote postgres server from where the tables are accessed by the destination database server as foreign tables.
-- Destination : destination is another postgres server where the foreign tables are created which is referring tables in source database server.
+- Source: source is the remote postgres server from where the tables are accessed by the destination database server as foreign tables.
+- Destination: destination is another postgres server where the foreign tables are created which is referring tables in source database server.
 
 ---
 
