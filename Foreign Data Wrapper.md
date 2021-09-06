@@ -97,11 +97,12 @@ from pg_available_extensions where 1=1 and installed_version is not null order b
 
 
 ```sql
-CREATE USER app_user WITH ENCRYPTED PASSWORD 'secret';
+-- CREATE USER app_user WITH ENCRYPTED PASSWORD 'secret';
+-- GRANT ALL PRIVILEGES ON DATABASE postgres TO app_user;
 ```
 
 ```sql
-grant usage on FOREIGN DATA WRAPPER postgres_fdw to app_user ;
+-- grant usage on FOREIGN DATA WRAPPER postgres_fdw to app_user ;
 ```
 
 ---
@@ -133,6 +134,9 @@ OPTIONS (user 'fdw_user', password 'secret');
 **or**
 
 ```sql
+-- DROP
+DROP USER MAPPING IF EXISTS FOR postgres SERVER hr;
+-- CREATE
 CREATE USER MAPPING FOR postgres
 SERVER hr
 OPTIONS (user 'fdw_user', password 'secret');
@@ -148,24 +152,24 @@ OPTIONS (user 'fdw_user', password 'secret');
 **Single Table**
 
 ```sql
-CREATE FOREIGN TABLE employees
+CREATE FOREIGN TABLE foreign_schema.employees	-- Destination Schema: foreign_schema
 (id int, first_name character varying(20), last_name character varying(20))
 SERVER hr
-OPTIONS (schema_name 'public', table_name 'employee');
+OPTIONS (schema_name 'public', table_name 'employee');	-- Source Schema: public
 ```
 
 **All Table**
 
 ```sql
-IMPORT FOREIGN SCHEMA "public" 
-FROM SERVER hr INTO public;
+IMPORT FOREIGN SCHEMA "public" 	-- Source Schema: public
+FROM SERVER hr INTO foreign_schema; -- Destination Schema: foreign_schema
 ```
 
 **Limited Table**
 
 ```sql
-IMPORT FOREIGN SCHEMA "public" limit to (employee,employee2,employee3,employee4) 
-FROM SERVER hr INTO public;
+IMPORT FOREIGN SCHEMA "public" limit to (employee,employee2,employee3,employee4) 	-- Source Schema: public
+FROM SERVER hr INTO foreign_schema; -- Destination Schema: foreign_schema
 ```
 
 ---
@@ -175,7 +179,7 @@ FROM SERVER hr INTO public;
 ---
 
 ```sql
-select * from employees;
+select * from foreign_schema.employees;
 ```
 
 ---

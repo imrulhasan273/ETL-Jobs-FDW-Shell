@@ -84,7 +84,9 @@ from pg_available_extensions where 1=1 and installed_version is not null order b
 -- Step 6: Grant privileges to user in the destination
 -- ---------------------------------------------------
 
--- CREATE USER app_user WITH ENCRYPTED PASSWORD 'secret';
+--CREATE USER app_user WITH ENCRYPTED PASSWORD 'secret';
+
+GRANT ALL PRIVILEGES ON DATABASE postgres TO app_user;
 
 grant usage on FOREIGN DATA WRAPPER postgres_fdw to app_user ;
 
@@ -102,10 +104,12 @@ CREATE SERVER hr
 -- Step 8: Create user mapping from destination user to source user
 -- ----------------------------------------------------------------
 
---CREATE USER MAPPING for app_user
---SERVER hr
---OPTIONS (user 'fdw_user', password 'secret');
+CREATE USER MAPPING for app_user
+SERVER hr
+OPTIONS (user 'fdw_user', password 'secret');
 
+
+DROP USER MAPPING IF EXISTS FOR postgres SERVER hr;
 
 CREATE USER MAPPING FOR postgres
 SERVER hr
@@ -118,18 +122,19 @@ OPTIONS (user 'fdw_user', password 'secret');
 -- -----------------------------------------------------------
 
 --- SINGLE TABLE 
-CREATE FOREIGN TABLE employees
+CREATE FOREIGN TABLE foreign_schema.employees	-- Destination Schema: foreign_schema
 (id int, first_name character varying(20), last_name character varying(20))
 SERVER hr
-OPTIONS (schema_name 'public', table_name 'employee');
+OPTIONS (schema_name 'public', table_name 'employee');	-- Source Schema: public
+
 
 --- MULTIPLE TABLE::ALL
-IMPORT FOREIGN SCHEMA "public" 
-FROM SERVER hr INTO public;
+IMPORT FOREIGN SCHEMA "public" 	-- Source Schema: public
+FROM SERVER hr INTO foreign_schema; -- Destination Schema: foreign_schema
 
 --- MULTIPLE TABLE::LIMIT
-IMPORT FOREIGN SCHEMA "public" limit to (employee,employee2,employee3,employee4) 
-FROM SERVER hr INTO public;
+IMPORT FOREIGN SCHEMA "public" limit to (employee,employee2,employee3,employee4) 	-- Source Schema: public
+FROM SERVER hr INTO foreign_schema; -- Destination Schema: foreign_schema
 
 -- Step 10: Test foreign table
 -- ---------------------------
