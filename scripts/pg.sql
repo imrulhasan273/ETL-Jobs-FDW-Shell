@@ -17,6 +17,8 @@ order by
 	name
 ;
 
+
+
 /*
 	Source 		: source is the remote postgres server from where the tables are accessed by the destination database server as foreign tables.
 	Destination : destination is another postgres server where the foreign tables are created which is referring tables in source database server.
@@ -139,7 +141,7 @@ FROM SERVER hr INTO foreign_schema; -- Destination Schema: foreign_schema
 -- Step 10: Test foreign table
 -- ---------------------------
 
-select * from employees;
+select * from foreign_schema.employees;
 
 
 
