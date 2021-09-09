@@ -146,9 +146,17 @@ CREATE TYPE rating_t AS enum('G','PG','PG-13','R','NC-17');
 
 ```sql
 CREATE FOREIGN TABLE film (
-film_id smallint NOT NULL,
-title varchar(255) NOT NULL,
-rating text,
-special_features text
+    film_id smallint NOT NULL,
+    title varchar(255) NOT NULL,
+    rating text,
+    special_features text
 ) SERVER mysql_svr OPTIONS (dbname 'sakila', table_name 'film');
 ```
+
+---
+
+--- 
+
+--- 
+
+

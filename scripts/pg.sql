@@ -141,17 +141,63 @@ FROM SERVER hr INTO foreign_schema; -- Destination Schema: foreign_schema
 -- Step 10: Test foreign table
 -- ---------------------------
 
-select * from foreign_schema.employees;
+select * from foreign_schema.employees ;
+
+
+
+-- --------------------------------------------------------------
+-- --------------------------------------------------------------
+-- --------------------------------------------------------------
+-- --------------------------------------------------------------
+-- --------------------------------------------------------------
+-- --------------------------------------------------------------
+
+
+
+
+CREATE EXTENSION postgres_fdw SCHEMA public ;
+
+
+
+
+CREATE SERVER hr 
+FOREIGN DATA WRAPPER postgres_fdw
+OPTIONS (dbname 'postgres', host '10.9.0.222', port '5432'); 
 
 
 
 
 
 
+CREATE USER MAPPING for postgres
+SERVER hr
+OPTIONS (user 'fdw_user', password 'secret');
+
+
+IMPORT FOREIGN SCHEMA "public" 	-- Source Schema: public
+FROM SERVER hr INTO foreign_schema; -- Destination Schema: foreign_schema
+
+
+IMPORT FOREIGN SCHEMA "public" limit to (employee,employee2,employee3,employee4) 	-- Source Schema: public
+FROM SERVER hr INTO foreign_schema; -- Destination Schema: foreign_schema
+
+- --
+
+IMPORT FOREIGN SCHEMA "public" limit to (employee,employee2,employee3,employee4) 	-- Source Schema: public
+FROM SERVER hr INTO foreign_schema; 
 
 
 
 
+
+select * from foreign_schema.employee4;
+
+
+CREATE table public.employee as
+select * from foreign_schema.employee;
+
+
+select * from public.t_etl_tables tet ;
 
 
 

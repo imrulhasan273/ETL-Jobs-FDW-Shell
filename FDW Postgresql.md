@@ -47,8 +47,10 @@ insert into employee4 values (1,'jobin','augustine'),(2,'avinash','vallarapu'),(
 ---
 
 ```sql
-GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE employee TO fdw_user;
+GRANT SELECT, INSERT, UPDATE, DELETE ON TABLE employee,employee2,employee3,employee4 TO fdw_user;
 ```
+
+> Note: All the table need to be permissioned in order to accress from remote DB with that user
 
 ---
 
