@@ -1,8 +1,8 @@
-# **ETL**
+# **Extract, Transform and Load**
 
 ---
 
-## **Tables**
+# **Tables**
 
 ---
 
