@@ -6,7 +6,7 @@
 
 ---
 
-### **daily_db_size**
+## **daily_db_size**
 
 **daily_dwh_schedule_jobs**
 
