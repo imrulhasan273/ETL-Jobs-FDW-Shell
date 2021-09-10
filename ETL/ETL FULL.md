@@ -113,6 +113,30 @@ CREATE TABLE public.daily_db_size (
 
 ## **t_etl_tables_log**
 
+```sql
+-- DROP TABLE public.t_etl_tables_log;
+
+CREATE TABLE public.t_etl_tables_log (
+	id bigserial NOT NULL,
+	dest_db varchar(100) NULL,
+	dest_table varchar(100) NULL,
+	source_db varchar(100) NULL,
+	source_table varchar(100) NULL,
+	dest_max_id numeric NULL,
+	source_max_id numeric NULL,
+	dest_new_max_id numeric NULL,
+	refresh_type varchar(10) NULL,
+	create_date timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	pk_column varchar(50) NULL,
+	column_list text NULL,
+	CONSTRAINT t_etl_tables_log_pkey PRIMARY KEY (id)
+);
+```
+
+**Sample Output**
+
+![](i/6.png)
+
 ---
 
 
