@@ -74,6 +74,24 @@ CREATE TABLE public.t_etl_tables (
 
 ## **t_daily_jobs_audit**
 
+```sql
+-- DROP TABLE public.t_daily_jobs_audit;
+
+CREATE TABLE public.t_daily_jobs_audit (
+	id bigserial NOT NULL,
+	run_time timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+	job_category varchar(100) NOT NULL,
+	job_name varchar(100) NOT NULL,
+	status varchar(10) NOT NULL,
+	error_message text NOT NULL,
+	sql_error text NOT NULL
+);
+```
+
+**Sample Output**
+
+![](i/4.png)
+
 ---
 
 ## **daily_db_size**
