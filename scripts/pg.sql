@@ -111,6 +111,7 @@ SERVER hr
 OPTIONS (user 'fdw_user', password 'secret');
 
 
+
 DROP USER MAPPING IF EXISTS FOR postgres SERVER hr;
 
 CREATE USER MAPPING FOR postgres
@@ -199,16 +200,55 @@ select * from foreign_schema.employee;
 
 select * from public.t_etl_tables tet ;
 
+update public.t_etl_tables
+set exclude_column = null
+where id =1;
+
+select * from public.proc_etl_refresh_partial();
+
+select * from public.proc_etl_refresh();
 
 
 
+select * from etl.employee4;
+
+SQL statement "INSERT INTO public.daily_db_size SELECT CURRENT_TIMESTAMP, pg_database_size('nobopay_dwh')/1024/1024 as db_size_mb"
+PL/pgSQL function proc_etl_refresh_partial() line 85 at SQL statement
+
+	string_agg(column_name, ', ') as column_list
+
+	
+	
+	
+	
+	
+select 10 < 10+1300000;
+	
+select 10::bigint < 11::bigint;
+
+	
+ * 	public.bulk_etl_insert_limit(dest_table, source_table, dest_max_id, source_max_id, time_lag_col_name, dest_db, source_db, pk_column, column_list)
+ * 	public.bulk_etl_insert_limit(	     $1, 		   $2, 			$3, 		   $4, 				  $5, 	   $6, 		  $7, 		 $8, 		  $9)
+ * 
+ 
+-- source_max_id := dest_max_id+1300000;
+
+SELECT 
+	COALESCE(max(pk_column), 0) 
+FROM source_db.source_table 
+where 
+	pk_column > dest_max_id 
+	AND pk_column <= source_max_id  INTO v_max_src_id; -- if row have more than 13lac ? -- why pk_column <= max_dest_id+13lac ?
+
+	
+
+SELECT LEAST(v_max_src_id, source_max_id)+10  INTO v_max_loop; -- here v_max_src_id < source_max_id   ==> TRUE 	
+-- why not 
+SELECT v_max_src_id into v_max_loop
 
 
-
-
-
-
-
+	
+	
 
 
 
