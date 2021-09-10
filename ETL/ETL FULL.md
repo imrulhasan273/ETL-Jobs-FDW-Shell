@@ -96,6 +96,19 @@ CREATE TABLE public.t_daily_jobs_audit (
 
 ## **daily_db_size**
 
+```sql
+-- DROP TABLE public.daily_db_size;
+
+CREATE TABLE public.daily_db_size (
+	"current_timestamp" timestamptz NULL,
+	db_size_mb int8 NULL
+);
+```
+
+**Sample Output**
+
+![](i/5.png)
+
 ---
 
 ## **t_etl_tables_log**
