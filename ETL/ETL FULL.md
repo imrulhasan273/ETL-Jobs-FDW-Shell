@@ -36,7 +36,7 @@ CREATE TABLE public.daily_dwh_schedule_jobs (
 );
 ```
 
-**Output**
+**Sample Output**
 
 [](i/1.png)
 [](i/2.png)
