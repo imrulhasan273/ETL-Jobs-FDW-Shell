@@ -194,6 +194,7 @@ FROM SERVER hr INTO foreign_schema;
 select * from foreign_schema.employee4;
 
 
+
 CREATE table public.employee as
 select * from foreign_schema.employee;
 
@@ -252,6 +253,12 @@ SELECT v_max_src_id into v_max_loop
 
 
 
+
+select * from public.t_etl_tables tet ;
+
+update public.t_etl_tables
+set exclude_column = '''last_name'''
+where id = 2;
 
 
 

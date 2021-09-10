@@ -45,6 +45,31 @@ CREATE TABLE public.daily_dwh_schedule_jobs (
 
 ## **t_etl_tables**
 
+```sql
+-- DROP TABLE public.t_etl_tables;
+
+CREATE TABLE public.t_etl_tables (
+	id serial NOT NULL,
+	remote_ip varchar(50) NULL,
+	remote_db varchar(50) NULL,
+	source_db varchar(50) NULL,
+	source_table varchar(100) NULL,
+	dest_db varchar(50) NULL,
+	dest_table varchar(100) NULL,
+	refresh_type varchar(50) NULL,
+	is_active int4 NULL,
+	time_lag_col_name varchar(50) NULL,
+	etl_type numeric NULL DEFAULT 0,
+	pk_column varchar(50) NULL,
+	exclude_column text NULL,
+	CONSTRAINT t_etl_tables_pkey PRIMARY KEY (id)
+);
+```
+
+**Sample Output**
+
+![](i/3.png)
+
 ---
 
 ## **t_daily_jobs_audit**
