@@ -256,7 +256,7 @@ SELECT v_max_src_id into v_max_loop
 
 select * from public.t_etl_tables tet ;
 
-update public.t_etl_tables
+--update public.t_etl_tables
 set exclude_column = '''last_name'''
 where id = 2;
 

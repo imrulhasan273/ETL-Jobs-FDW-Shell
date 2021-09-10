@@ -70,6 +70,12 @@ CREATE TABLE public.t_etl_tables (
 
 ![](i/3.png)
 
+```sql
+update public.t_etl_tables
+    set exclude_column = '''last_name'''
+where id = 2;
+```
+
 ---
 
 ## **t_daily_jobs_audit**
@@ -138,5 +144,12 @@ CREATE TABLE public.t_etl_tables_log (
 ![](i/6.png)
 
 ---
+
+---
+
+# **Functions**
+
+---
+
 
 
